@@ -87,13 +87,13 @@ elif [ -f "$LOCAL_SOURCE_DIR/build.gradle" ]; then
     # TODO: Specify setting file with -c sss
   fi
 
-  echo "Found gradle.build ... attempting to build with 'gradle -s ${BUILDER_ARGS}'"
+  echo "Found gradle.build ... attempting to build with './gradlew -s ${BUILDER_ARGS}'"
 
   echo "Gradle version:"
-  gradle --version
+  ./gradlew --version
 
   # Execute the actual build
-  gradle -s $BUILDER_ARGS
+  ./gradlew -s $BUILDER_ARGS
 
   ERR=$?
   if [ $ERR -ne 0 ]; then
@@ -108,7 +108,7 @@ elif [ -f "$LOCAL_SOURCE_DIR/build.gradle" ]; then
 
 
   # clean up after maven
-  gradle clean
+  ./gradlew clean
 #  if [ -d "$HOME/.m2/repository" ]; then
 #    rm -r "$HOME/.m2/repository"
 #  fi
