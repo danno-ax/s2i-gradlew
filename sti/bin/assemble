@@ -1,7 +1,7 @@
 #!/bin/bash
 . $(dirname $0)/functions
-GRADLE_USER_HOME=/opt/gradle
 HOME=/opt/app-root/src
+export GRADLE_USER_HOME=$HOME
 # we will move any code provided by s2i to here
 LOCAL_SOURCE_DIR=${HOME}/source
 mkdir -p $LOCAL_SOURCE_DIR
@@ -104,8 +104,6 @@ echo "Gradle version:"
   $LOCAL_SOURCE_DIR/gradlew $BUILDER_ARGS
 
   ERR=$?
-
-ls -la build/libs
   if [ $ERR -ne 0 ]; then
     echo "Aborting due to error code $ERR from Gradle build"
     exit $ERR
@@ -132,7 +130,6 @@ else
 
   copy_artifacts "$ARTIFACT_DIR" jar
 fi
-
 # As Microservices you should only have 1 fat jar
 # if compgen -G "/tmp/src/*" >/dev/null; then
 # TODO: Review how best move these

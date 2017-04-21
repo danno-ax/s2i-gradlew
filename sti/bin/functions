@@ -70,7 +70,7 @@ manage_incremental_build() {
 # s2i 'save-artifacts' routine
 s2i_save_build_artifacts() {
     cd ${HOME}
-    tar cf - .m2
+    tar cf - caches
 }
 
 # optionally clear the local maven repository after the build

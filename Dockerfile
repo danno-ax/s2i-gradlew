@@ -5,7 +5,7 @@ MAINTAINER Airwallex <developers@airwallex.com>
 
 # Install build tools on top of base image
 # Java jdk 8, Maven 3.3, Gradle 2.6
-RUN apt-get -qq update && apt-get install -y -qq curl tar unzip bc lsof git
+RUN apt-get -qq update && apt-get install -y -qq curl tar unzip bc lsof git tree
 RUN mkdir -p /opt/openshift && \
     mkdir -p /opt/app-root/source && chmod -R a+rwX /opt/app-root/source && \
     mkdir -p /opt/s2i/destination && chmod -R a+rwX /opt/s2i/destination && \
@@ -51,6 +51,8 @@ USER 1001
 
 # Set the default port for applications built using this image
 EXPOSE 8080
+
+VOLUME /opt/app-root/caches
 
 # Set the default CMD for the image
 # CMD ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/opt/openshift/app.jar"]
